@@ -1,18 +1,18 @@
 {
-	"name": "auto_queue",
+	"name": "intelliqueue",
 	"version": "1.0.0",
-	"description": "Port of mpd-sima system for Volumio : Autoqueue system",
+	"description": "Automatic playlist based on mpd-sima tool",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "Julien Bellion",
+	"author": "Neinoi",
 	"license": "ISC",
 	"repository": "https://github.com/yourname/yourrepo",
 	"volumio_info": {
-		"prettyName": "Auto queue",
+		"prettyName": "IntelliQueue",
 		"icon": "fa-lightbulb-o",
-		"plugin_type": "music_service",
+		"plugin_type": "system_controller",
 		"architectures": [
 			"amd64",
 			"armhf",

@@ -7,8 +7,8 @@ var exec = require('child_process').exec;
 var execSync = require('child_process').execSync;
 
 
-module.exports = autoQueue;
-function autoQueue(context) {
+module.exports = intelliqueue;
+function intelliqueue(context) {
 	var self = this;
 
 	this.context = context;
@@ -20,7 +20,7 @@ function autoQueue(context) {
 
 
 
-autoQueue.prototype.onVolumioStart = function()
+intelliqueue.prototype.onVolumioStart = function()
 {
 	var self = this;
 	var configFile=this.commandRouter.pluginManager.getConfigurationFile(this.context,'config.json');
@@ -30,7 +30,7 @@ autoQueue.prototype.onVolumioStart = function()
     return libQ.resolve();
 }
 
-autoQueue.prototype.onStart = function() {
+intelliqueue.prototype.onStart = function() {
     var self = this;
 	var defer=libQ.defer();
 
@@ -41,7 +41,7 @@ autoQueue.prototype.onStart = function() {
     return defer.promise;
 };
 
-autoQueue.prototype.onStop = function() {
+intelliqueue.prototype.onStop = function() {
     var self = this;
     var defer=libQ.defer();
 
@@ -51,7 +51,7 @@ autoQueue.prototype.onStop = function() {
     return libQ.resolve();
 };
 
-autoQueue.prototype.onRestart = function() {
+intelliqueue.prototype.onRestart = function() {
     var self = this;
     // Optional, use if you need it
 };
@@ -59,7 +59,7 @@ autoQueue.prototype.onRestart = function() {
 
 // Configuration Methods -----------------------------------------------------------------------------
 
-autoQueue.prototype.getUIConfig = function() {
+intelliqueue.prototype.getUIConfig = function() {
     var defer = libQ.defer();
     var self = this;
 
@@ -82,21 +82,21 @@ autoQueue.prototype.getUIConfig = function() {
     return defer.promise;
 };
 
-autoQueue.prototype.getConfigurationFiles = function() {
+intelliqueue.prototype.getConfigurationFiles = function() {
 	return ['config.json'];
 }
 
-autoQueue.prototype.setUIConfig = function(data) {
+intelliqueue.prototype.setUIConfig = function(data) {
 	var self = this;
 	//Perform your installation tasks here
 };
 
-autoQueue.prototype.getConf = function(varName) {
+intelliqueue.prototype.getConf = function(varName) {
 	var self = this;
 	//Perform your installation tasks here
 };
 
-autoQueue.prototype.setConf = function(varName, varValue) {
+intelliqueue.prototype.setConf = function(varName, varValue) {
 	var self = this;
 	//Perform your installation tasks here
 };
@@ -107,14 +107,14 @@ autoQueue.prototype.setConf = function(varName, varValue) {
 // If your plugin is not a music_sevice don't use this part and delete it
 
 
-autoQueue.prototype.addToBrowseSources = function () {
+intelliqueue.prototype.addToBrowseSources = function () {
 
 	// Use this function to add your music service plugin to music sources
     //var data = {name: 'Spotify', uri: 'spotify',plugin_type:'music_service',plugin_name:'spop'};
     this.commandRouter.volumioAddToBrowseSources(data);
 };
 
-autoQueue.prototype.handleBrowseUri = function (curUri) {
+intelliqueue.prototype.handleBrowseUri = function (curUri) {
     var self = this;
 
     //self.commandRouter.logger.info(curUri);
@@ -127,63 +127,63 @@ autoQueue.prototype.handleBrowseUri = function (curUri) {
 
 
 // Define a method to clear, add, and play an array of tracks
-autoQueue.prototype.clearAddPlayTrack = function(track) {
+intelliqueue.prototype.clearAddPlayTrack = function(track) {
 	var self = this;
-	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'autoQueue::clearAddPlayTrack');
+	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'intelliqueue::clearAddPlayTrack');
 
 	self.commandRouter.logger.info(JSON.stringify(track));
 
 	return self.sendSpopCommand('uplay', [track.uri]);
 };
 
-autoQueue.prototype.seek = function (timepos) {
-    this.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'autoQueue::seek to ' + timepos);
+intelliqueue.prototype.seek = function (timepos) {
+    this.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'intelliqueue::seek to ' + timepos);
 
     return this.sendSpopCommand('seek '+timepos, []);
 };
 
 // Stop
-autoQueue.prototype.stop = function() {
+intelliqueue.prototype.stop = function() {
 	var self = this;
-	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'autoQueue::stop');
+	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'intelliqueue::stop');
 
 
 };
 
 // Spop pause
-autoQueue.prototype.pause = function() {
+intelliqueue.prototype.pause = function() {
 	var self = this;
-	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'autoQueue::pause');
+	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'intelliqueue::pause');
 
 
 };
 
 // Get state
-autoQueue.prototype.getState = function() {
+intelliqueue.prototype.getState = function() {
 	var self = this;
-	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'autoQueue::getState');
+	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'intelliqueue::getState');
 
 
 };
 
 //Parse state
-autoQueue.prototype.parseState = function(sState) {
+intelliqueue.prototype.parseState = function(sState) {
 	var self = this;
-	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'autoQueue::parseState');
+	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'intelliqueue::parseState');
 
 	//Use this method to parse the state and eventually send it with the following function
 };
 
 // Announce updated State
-autoQueue.prototype.pushState = function(state) {
+intelliqueue.prototype.pushState = function(state) {
 	var self = this;
-	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'autoQueue::pushState');
+	self.commandRouter.pushConsoleMessage('[' + Date.now() + '] ' + 'intelliqueue::pushState');
 
 	return self.commandRouter.servicePushState(state, self.servicename);
 };
 
 
-autoQueue.prototype.explodeUri = function(uri) {
+intelliqueue.prototype.explodeUri = function(uri) {
 	var self = this;
 	var defer=libQ.defer();
 
@@ -192,7 +192,7 @@ autoQueue.prototype.explodeUri = function(uri) {
 	return defer.promise;
 };
 
-autoQueue.prototype.getAlbumArt = function (data, path) {
+intelliqueue.prototype.getAlbumArt = function (data, path) {
 
 	var artist, album;
 
@@ -231,7 +231,7 @@ autoQueue.prototype.getAlbumArt = function (data, path) {
 
 
 
-autoQueue.prototype.search = function (query) {
+intelliqueue.prototype.search = function (query) {
 	var self=this;
 	var defer=libQ.defer();
 
@@ -240,24 +240,24 @@ autoQueue.prototype.search = function (query) {
 	return defer.promise;
 };
 
-autoQueue.prototype._searchArtists = function (results) {
+intelliqueue.prototype._searchArtists = function (results) {
 
 };
 
-autoQueue.prototype._searchAlbums = function (results) {
+intelliqueue.prototype._searchAlbums = function (results) {
 
 };
 
-autoQueue.prototype._searchPlaylists = function (results) {
+intelliqueue.prototype._searchPlaylists = function (results) {
 
 
 };
 
-autoQueue.prototype._searchTracks = function (results) {
+intelliqueue.prototype._searchTracks = function (results) {
 
 };
 
-autoQueue.prototype.goto=function(data){
+intelliqueue.prototype.goto=function(data){
     var self=this
     var defer=libQ.defer()
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Installing auto queue Dependencies"
+echo "Installing intelliqueue Dependencies"
 sudo apt-get update
 # Install the required packages via apt-get
 sudo apt-get -y install
